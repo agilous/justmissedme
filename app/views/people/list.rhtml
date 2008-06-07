@@ -1,0 +1,29 @@
+<h1>You just missed me!</h1>
+<% if !@people.nil? and @people.length > 0 -%>
+<p>According to <a href="http://en.wikipedia.org">Wikipedia</a> the following
+individuals checked out of the Hotel Reality just prior to <%= @date %>.</p>
+<table summary="A list of 'famous' dead people.">
+  <tr>
+    <th>Name</th>
+    <th>Date of Death</th>
+  </tr>
+<% for person in @people -%>
+  <tr>
+    <td><a href="http://en.wikipedia.org<%= person.page_url %>"><%= person.name %></a></td>
+    <td><%= person.date_of_death.strftime("%B %e, %Y") %></td>
+  </tr>
+<% end -%>
+</table>
+<% elsif @people.length == 0 -%>
+<p>Sorry. I couldn't find any dead people near '<%= @date %>'. You're probably
+(1) searching too early in history, (2) searching in an era for which
+<a href="http://en.wikipedia.org/">Wikipedia</a> contains no information, or
+(3) searching in the future. Silly you!</p>
+<% else -%>
+<p>Sorry. I can't make a lick of sense of the date you entered which was '<%= @date %>'.</p>
+<% end -%>
+<p>Care to <a href="/">try again</a>?
+<% if !@people.nil? -%>
+Think the data is erroneous? <a href="mailto:bill_AT_justmissedme_DOT_com">Tell me</a> about it!
+<% end -%>
+Don't forget the <a href="/faq/list">FAQ</a>!</p>
