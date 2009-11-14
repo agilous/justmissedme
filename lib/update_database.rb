@@ -5,10 +5,13 @@ require 'rubygems'
 require 'hpricot'
 require 'open-uri'
 
+found_total = 0
+updated_total = 0
+
 found_deaths = false
 start_parsing = false
 
-begin_deaths = Regexp.new('<p><a name="Deaths" id="Deaths"></a></p>', Regexp::IGNORECASE)
+begin_deaths = Regexp.new('<span class="mw-headline" id="Deaths">Deaths</span>', Regexp::IGNORECASE)
 list_item_found = Regexp.new('<li>')
 found_list = Regexp.new('<ul>', Regexp::IGNORECASE)
 stop_parsing = Regexp.new('<p><a name="Holidays_and_observances" id="Holidays_and_observances">', Regexp::IGNORECASE)
@@ -80,12 +83,22 @@ for month in 1..12
           if (!year.nil? and !name.nil? and !url.nil?)
             date_of_death = Date.new(year, month, day).strftime("%Y-%m-%d 00:00:00")
             puts "Found #{name}, #{date_of_death}, #{url}"
-            person = Person.new
-            person.name = name
-            person.date_of_death = date_of_death
-            person.page_url = url
-            person.revision_timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-            person.save
+            found_person = Person.find_by_page_url(url)
+            if found_person
+              puts "Updating #{name}, #{date_of_death}, #{url}"
+              found_person.revision_timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+              found_person.save
+              found_total = found_total + 1
+            else
+              puts "Found #{name}, #{date_of_death}, #{url}"
+              person = Person.new
+              person.name = name
+              person.date_of_death = date_of_death
+              person.page_url = url
+              person.revision_timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+              person.save
+              updated_total = updated_total + 1
+            end
           end
         end
       end
@@ -96,3 +109,5 @@ for month in 1..12
     end
   end
 end
+
+puts "New: #{found_total}, Updated: #{updated_total}"
