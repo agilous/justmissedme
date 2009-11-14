@@ -22,9 +22,8 @@ namespace :deploy do
     run "touch #{current_path}/tmp/restart.txt"
   end
 
-  task :symlink_configs do
+  task :symlink_db_config do
     run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/log/production.log #{current_path}/log/production.log"
   end
 
   [:start, :stop].each do |t|
@@ -32,3 +31,5 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
 end
+
+after "deploy:symlink", "deploy:symlink_db_config"
