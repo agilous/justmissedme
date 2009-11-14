@@ -9,7 +9,7 @@ individuals checked out of the Hotel Reality just prior to <%= @date %>.</p>
   </tr>
 <% for person in @people -%>
   <tr>
-    <td><a href="http://en.wikipedia.org<%= person.page_url %>"><%= person.name %></a></td>
+    <td><a href="http://en.wikipedia.org<%= person.page_url %>" target="_blank"><%= person.name %></a></td>
     <td><%= person.date_of_death.strftime("%B %e, %Y") %></td>
   </tr>
 <% end -%>
