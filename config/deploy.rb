@@ -1,4 +1,4 @@
-set :domain,            "bam.dreamhost.com"
+set :domain,            "dobro.dreamhost.com"
 set :user,              "barnetwc"
 set :application,       "justmissedme"
 set :application_dir,   "/home/#{user}/domains/#{application}.com"
