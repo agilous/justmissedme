@@ -11,10 +11,10 @@ updated_total = 0
 found_deaths = false
 start_parsing = false
 
-begin_deaths = Regexp.new('<span class="mw-headline" id="Deaths">Deaths</span>', Regexp::IGNORECASE)
-list_item_found = Regexp.new('<li>')
-found_list = Regexp.new('<ul>', Regexp::IGNORECASE)
-stop_parsing = Regexp.new('<p><a name="Holidays_and_observances" id="Holidays_and_observances">', Regexp::IGNORECASE)
+begin_deaths     = Regexp.new('<span class="mw-headline" id="Deaths">Deaths</span>', Regexp::IGNORECASE)
+list_item_found  = Regexp.new('<li>')
+found_list       = Regexp.new('<ul>', Regexp::IGNORECASE)
+stop_parsing     = Regexp.new('<span class="mw-headline" id="Holidays_and_observances">', Regexp::IGNORECASE)
 missing_date_url = Regexp.new('<li>([0-9]{1,4}) -', Regexp::IGNORECASE)
 
 months = [ '', 'January', 'February', 'March', 'April', 'May', 'June',
@@ -36,19 +36,19 @@ for month in 1..12
       while line = doc.gets
 
         # Find the paragraph containing the Deaths anchor.
-        if !found_deaths and begin_deaths.match(line)
+        if !found_deaths && begin_deaths.match(line)
           found_deaths = true
           next
         end
 
         # See if we need to start parsing deaths.
-        if found_deaths and found_list.match(line)
+        if found_deaths && found_list.match(line)
           start_parsing = true
           next
         end
 
         # Stop when done!
-        if start_parsing and stop_parsing.match(line)
+        if start_parsing && stop_parsing.match(line)
           break
         end
 
@@ -80,7 +80,7 @@ for month in 1..12
           url = (item/"a")[pos].attributes['href']
 
           # If the year, name, and URL are not nil process the person.
-          if (!year.nil? and !name.nil? and !url.nil?)
+          if (!year.nil? && !name.nil? && !url.nil?)
             date_of_death = Date.new(year, month, day).strftime("%Y-%m-%d 00:00:00")
             puts "Found #{name}, #{date_of_death}, #{url}"
             found_person = Person.find_by_page_url(url)
