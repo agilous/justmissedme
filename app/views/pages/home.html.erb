@@ -1,0 +1,17 @@
+<h1>You just missed me!</h1>
+<p>Enter your birth date, or any date for that matter, and courtesy of <a href="http://en.wikipedia.org">Wikipedia</a> see a list of &ldquo;famous&rdquo; people who passed away just before you were born (or the date you submitted).</p>
+<%= form_tag :controller => 'people', :action => 'list' %>
+<p>Please enter your birth date:
+<%= form_tag '/people' %>
+<%= text_field_tag :birthdate %>
+<%= submit_tag "Show me the dead people!" %>
+</p>
+<script>
+  $(function() {
+  $( "#birthdate" ).datepicker({
+  changeMonth: true,
+  changeYear: true,
+  minDate: "<%= (Date.today - 100.years).strftime("%m/%d/%Y") %>",
+  });
+  });
+</script>

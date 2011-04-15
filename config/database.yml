@@ -1,0 +1,11 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: jmm_dev
+  username: root
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: jmm_test
+  username: root
