@@ -13,3 +13,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov', '>= 0.4.0'
 end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
+end

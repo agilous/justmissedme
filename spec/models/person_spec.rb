@@ -1,5 +1,18 @@
 require 'spec_helper'
 
 describe Person do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  let(:person) { Factory.build(:person) }
+
+  describe "validations" do
+
+    it "should create a valid person" do
+      person.should be_valid
+    end
+
+    it "should require a name" do
+      person.name = nil
+      person.should_not be_valid
+    end
+  end
 end
