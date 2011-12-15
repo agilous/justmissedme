@@ -19,3 +19,5 @@ public/javascripts/all.js
 public/stylesheets/all.css
 TAGS
 config/database.yml
+vendor/ruby/
+.bundle
