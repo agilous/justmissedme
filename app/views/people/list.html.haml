@@ -1,0 +1,37 @@
+%h1 You just missed me!
+- if !@people.nil? and @people.length > 0
+  %p
+    According to
+    %a{:href => "http://en.wikipedia.org"} Wikipedia
+    the following
+    individuals checked out of the Hotel Reality just prior to #{@date}.
+  %table{:summary => "A list of 'famous' dead people."}
+    %tr
+      %th Name
+      %th Date of Death
+    - for person in @people
+      %tr
+        %td
+          %a{:href => "http://en.wikipedia.org#{person.page_url}", :target => "_blank"}= person.name
+        %td= person.date_of_death.strftime("%B %e, %Y")
+- elsif @people.length == 0
+  %p
+    Sorry. I couldn't find any dead people near '#{@date}'. You're probably
+    (1) searching too early in history, (2) searching in an era for which
+    %a{:href => "http://en.wikipedia.org/"} Wikipedia
+    contains no information, or
+    (3) searching in the future. Silly you!
+- else
+  %p
+    Sorry. I can't make a lick of sense of the date you entered which was '#{@date}'.
+%p
+  Care to
+  = succeed "?" do
+    %a{:href => "/"} try again
+  - if !@people.nil?
+    Think the data is erroneous?
+    %a{:href => "mailto:bill_AT_justmissedme_DOT_com"} Tell me
+    about it!
+  Don't forget the
+  = succeed "!" do
+    %a{:href => "/faq/list"} FAQ

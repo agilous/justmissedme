@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %link{:href => "http://www.justmissedme.com/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    %title You just missed me!
+    = stylesheet_link_tag "application"
+    %script{:src => "http://www.google-analytics.com/urchin.js", :type => "text/javascript"}
+  %body
+    #content
+      = yield
+    #37signals
+      %center
+        %a{:href => "http://www.basecampHQ.com/?referrer=BILLBARNETT"}
+          %img{:alt => "Basecamp", :border => "0", :height => "125", :src => "https://affiliate.37signals.com/images/products/basecamp/banner-125x125.png", :width => "125"}/
+        %a{:href => "http://www.highriseHQ.com/?referrer=BILLBARNETT"}
+          %img{:alt => "Highrise", :border => "0", :height => "125", :src => "https://affiliate.37signals.com/images/products/highrise/banner-125x125.png", :width => "125"}/
+        %a{:href => "http://www.backpackIT.com/?referrer=BILLBARNETT"}
+          %img{:alt => "Backpack", :border => "0", :height => "125", :src => "https://affiliate.37signals.com/images/products/backpack/banner-125x125.png", :width => "125"}/
+    #google
+      :javascript
+              %script{:src => "http://pagead2.googlesyndication.com/pagead/show_ads.js", :type => "text/javascript"}
+    %p{:align => "center"}
+      %a{:href => "http://www.dreamhost.com/r.cgi?74365"}
+        %img{:alt => "DreamHost", :src => image_path("dreamhost.png"), :style => "border: 0px;"}/
+    #footer
+      2007 - #{Date.today.strftime("%Y")} &copy;
+      %a{:href => "http://creativecommons.org/licenses/by/3.0/"}
+        %img#footer-img{:alt => "Creative Commons", :src => image_path("creative-commons.png")}/
+    :javascript
+      _uacct = "UA-195213-4";
+      urchinTracker();

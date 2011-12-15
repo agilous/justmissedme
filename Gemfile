@@ -1,12 +1,29 @@
 source 'http://rubygems.org'
 
-gem 'rake',             '0.8.7'
-gem 'rails',            '2.3.8'
-gem 'mysql'
+gem 'rails', '3.1.3'
 
-gem 'hpricot',          "0.8.2" # 0.8.3 was creating seg. faults in testing (https://github.com/hpricot/hpricot/issues/32)
+gem 'pg'
+gem 'haml'
+gem "therubyracer",:require => "v8"
 
-group :development, :test do
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.1.5'
+  gem 'coffee-rails', '~> 3.1.1'
+  gem 'uglifier', '>= 1.1.0'
+end
+
+gem 'jquery-rails'
+gem 'bootstrap-sass'
+
+group :development do
   gem 'heroku'
-  gem 'ruby-debug'
+  gem 'taps'
+end
+
+group :test do
+  # Pretty printed test output
+  gem 'turn', :require => false
+  gem 'minitest'
 end

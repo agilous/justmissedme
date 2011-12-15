@@ -1,0 +1,20 @@
+login: &login
+  username: postgres
+  password: 
+
+connection: &connection
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  min_messages: warning
+
+development:
+  database: justmissedme_development
+  <<: *connection
+  <<: *login
+
+test:
+  database: justmissedme_test
+  <<: *connection
+  <<: *login

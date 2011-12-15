@@ -1,0 +1,32 @@
+%h1 You just missed me!
+%p
+  Enter your birth date, or any date for that matter, and courtesy of
+  %a{:href => "http://en.wikipedia.org"} Wikipedia
+  see a list of “famous” people who passed away just before you were born (or the date you submitted).
+= form_tag :action => 'list'
+%p
+  Please enter your birth date:
+  %form{:action => "/people/list", :method => "post"}
+    %select{:name => "month"}
+      - for month in 1..12
+        - selected = ''
+        - if month == 6 then selected = "selected " end
+        <option #{selected}value="#{sprintf("%02d", month)}">#{sprintf("%02d", month)}
+    \/
+    %select{:name => "day"}
+      - for day in 1..31
+        - selected = ''
+        - if day == 8 then selected = "selected " end
+        <option #{selected}value="#{sprintf("%02d", day)}">#{sprintf("%02d", day)}
+    \/
+    %select{:name => "century"}
+      - for century in 0..20
+        - selected = ''
+        - if century == 19 then selected = "selected " end
+        <option #{selected}value="#{sprintf("%02d", century)}">#{sprintf("%02d", century)}
+    %select{:name => "year"}
+      - for year in 0..99
+        - selected = ''
+        - if year == 61 then selected = "selected " end
+        <option #{selected}value="#{sprintf("%02d", year)}">#{sprintf("%02d", year)}
+    %input{:type => "submit", :value => "Show me the Dead People!"}/

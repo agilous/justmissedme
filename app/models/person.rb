@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  validates_presence_of :name
-  validates_presence_of :page_url
-  validates_presence_of :date_of_death
+  validates :name, :presence => true
+  validates :page_url, :presence => true
+  validates :date_of_death, :presence => true
 end
