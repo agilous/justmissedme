@@ -1,0 +1,57 @@
+%h1 You just missed me! - FAQ
+%p.question What kind of sick, twisted freak would publish such a site?
+%p.answer
+  %a{:href => "http://agilo.us/"} This
+  kind.
+%p.question Why don't you give us all a break and use a pop-up calendar for date entry?
+%p.answer
+  In case you hadn't noticed, this is a bit of a minimalist
+  Web site. The overhead for pop-up calendars is a bit more than I can chew at
+  the moment. I did experiment with
+  %a{:href => "http://chronic.rubyforge.org/"} Chronic
+  as a means of permitting free-form date entry but it is limited by it's current
+  inability to parse dates prior to December 14, 1901.
+%p.question What gave you the idea to create this site?
+%p.answer
+  My employer needed a means of parsing a certain Web page to
+  gather information about prospective customers. I had heard of
+  %a{:href => "https://github.com/hpricot/hpricot"} hpricot
+  and decided it
+  was just what I needed to do the job but wanted to play with it. This site is
+  the result of that play.
+%p.question So, how did you do it?
+%p.answer
+  I originally thought the ideal solution would be to parse line-by-line
+  XML dumps of the Wikipedia source available
+  = succeed "." do
+    %a{:href => "http://download.wikimedia.org/enwikisource/latest/"} here
+  However, when these dumps started to increase in size dramatically it became
+  evident that this solution would not scale. When I discovered that date pages
+  like
+  %a{:href => "http://en.wikipedia.org/wiki/February_13#Deaths"} this one
+  listed deaths, the solution was obvious. By parsing the date pages I can
+  rebuild the entire database in about 10 minutes as opposed to the 30 minutes
+  or more it took when the XML dumps were only about 200MB in size. They've
+  since grown considerably in size.
+%p.question
+  I thought you said you used
+  = succeed "?!" do
+    %a{:href => "https://github.com/hpricot/hpricot"} hpricot
+%p.answer
+  Well,
+  %a{:href => "https://github.com/hpricot/hpricot"} hpricot
+  got my creative juices flowing but my little MacBook choked when I feed it the
+  hpricot-based script which was pointed at a 200MB+ data file. I thought
+  %a{:href => "http://en.wikipedia.org/wiki/Streaming_Transformations_for_XML"} STX
+  might be the way to go but I eventually settled for line-by-line parsing of the
+  data file combined with regular expressions. Hpricot is now used to extract
+  the desired data from each individual line.
+%p.question I would like to know more about how you did this.
+%p.answer
+  I have, to a degree, detailed the process
+  = succeed "." do
+    %a{:href => "http://agilo.us/category/justmissedme/"} here
+%p.question You moron! You forgot to answer my question!!!
+%p.answer
+  %a{:href => "mailto:bill_AT_justmissedme_DOT_com?Subject=You didn't answer my question!"}> Opps
+  \.
